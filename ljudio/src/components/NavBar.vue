@@ -1,12 +1,32 @@
 <template>
-  <div>
+  <div class="navBar">
+    <link
+      href="https://fonts.googleapis.com/css?family=Orbitron:regular,500,600,700,800,900"
+      rel="stylesheet"
+    />
     <nav>
       <!-- change to router-link -->
-      <ul>
-        <li><a href="">Songs</a></li>
-        <li><a href="">Artist</a></li>
-        <li><a href="">Album</a></li>
-      </ul>
+      <a href="">Songs</a>
+      <a href="">Artist</a>
+      <a href="">Album</a>
     </nav>
   </div>
 </template>
+<script>
+export default {};
+</script>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Orbitron:regular,500,600,700,800,900);
+nav {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2vw;
+}
+a {
+  margin-right: 2vw;
+  font-size: 30px;
+  font-family: Orbitron;
+  color: #00adb5;
+  text-decoration: underline;
+}
+</style>
