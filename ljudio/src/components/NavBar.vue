@@ -8,14 +8,13 @@
       <!-- change to router-link -->
       <a href="">Songs</a>
       <a href="">Artist</a>
-      <a href="">Album</a>
     </nav>
   </div>
 </template>
 <script>
 export default {};
 </script>
-<style>
+<style scoped>
 @import url(https://fonts.googleapis.com/css?family=Orbitron:regular,500,600,700,800,900);
 nav {
   display: flex;
@@ -23,7 +22,7 @@ nav {
   margin-left: 2vw;
 }
 a {
-  margin-right: 2vw;
+  margin-right: 5vw;
   font-size: 30px;
   font-family: Orbitron;
   color: #00adb5;
