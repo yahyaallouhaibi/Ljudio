@@ -11,9 +11,10 @@
                 <h3><img src="../assets/album.png" alt="album"> Album</h3>
             </div>
             <div class="playerButtons">
-                <button id="previousSong"><i class="fas fa-step-backward"></i></button>
-                <button id="playSong"><i class="fas fa-play"></i></button> <!--change to pause when playing a song-->
-                <button id="nextSong"><i class="fas fa-step-forward"></i></button>
+                <button @click="PreviusSong()" id="previousSong"><i class="fas fa-step-backward"></i></button>
+                <button id="playSong" @click="PlaySong()">
+                    <i class="fas fa-play"></i></button> <!--change to pause when playing a song-->
+                <button id="nextSong" @click="NextSong()"><i class="fas fa-step-forward"></i></button>
             </div>
             
       
@@ -29,6 +30,12 @@
 
 <script>
     export default{
+        methods:{
+            PlaySong(id){
+                window.player.loadVideoById(id)
+                window.palyer.playVideo()
+            }
+        }
         
     }
 </script>

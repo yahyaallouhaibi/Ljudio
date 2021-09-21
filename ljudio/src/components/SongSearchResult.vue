@@ -1,7 +1,6 @@
 <template>
-    <div class="songResults">
-                <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
-
+    <div @click="playChosenSong" class="songResults">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
         <img src="../assets/headset.png" alt="thumbnail">
         <div class="songDetails">
             <h3>Song</h3>

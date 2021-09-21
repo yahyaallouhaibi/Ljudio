@@ -1,12 +1,13 @@
 <template>
   <div class="wrap">
-    <form class="search">
+    <form @submit.prevent class="search">
       <input
+        v-model="searchedTerm"
         type="text"
         class="searchTerm"
         placeholder="What are you looking for?"
       />
-      <button type="submit" class="searchButton">
+      <button @click="search(searchedTerm)" type="submit" class="searchButton">
         <img src="../assets/magnifying-glass.png" alt="search" />
       </button>
     </form>
@@ -14,8 +15,33 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   name: "SearchBar",
+
+  data(){
+    return{
+      searchedTerm:""
+      
+    }
+  },
+
+  computed:{
+    
+
+  },
+
+  methods:{
+    ...mapActions(["fetchSongs"]),
+
+
+     search(searchTerm){
+       this.searchedTerm = searchTerm;
+       this.fetchSongs(searchTerm)
+     }
+
+  }
 };
 </script>
 
@@ -37,12 +63,10 @@ body {
   height: 20px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: #9dbfaf;
+  
 }
 
-.searchTerm:focus {
-  color: #00b4cc;
-}
+
 
 .searchButton {
   width: 40px;
