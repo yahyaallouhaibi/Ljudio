@@ -7,7 +7,7 @@
         class="searchTerm"
         placeholder="What are you looking for?"
       />
-      <button @click="search(searchedTerm)" type="submit" class="searchButton">
+      <button @click="searchForSongs(searchedTerm)" type="submit" class="searchButton">
         <img src="../assets/magnifying-glass.png" alt="search" />
       </button>
     </form>
@@ -16,29 +16,25 @@
 
 <script>
 import {mapActions} from 'vuex'
+import router from '../router/index'
 
 export default {
   name: "SearchBar",
 
   data(){
     return{
-      searchedTerm:""
-      
+      searchedTerm:"",
+      searchedSongs:[]
     }
-  },
-
-  computed:{
-    
-
   },
 
   methods:{
     ...mapActions(["fetchSongs"]),
 
-
-     search(searchTerm){
-       this.searchedTerm = searchTerm;
-       this.fetchSongs(searchTerm)
+      searchForSongs(searchTerm){
+      this.$store.state.searchedTerm = searchTerm;
+      this.fetchSongs(searchTerm)
+      router.push("/")
      }
 
   }
