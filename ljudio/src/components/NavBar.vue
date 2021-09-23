@@ -7,6 +7,7 @@
     <nav>
       <router-link to="/" @click="searchForSongs(this.$store.state.searchedTerm)" >Songs</router-link>
       <router-link to="/Artists" @click="searchForArtists(this.$store.state.searchedTerm)">Artist</router-link>
+      <router-link to="/Playlists" @click="searchForPlaylists()">Playlists</router-link>
       <SearchBar/>
     </nav>
   </div>
@@ -20,7 +21,8 @@
     data(){
       return{
         searchedSongs:[],
-        searchedArtists:[]
+        searchedArtists:[],
+        searchedPlayLists:[]
       }
     },
 
@@ -28,16 +30,20 @@
       SearchBar
     },
     methods:{
-      ...mapActions(["fetchSongs","fetchArtists"]),
+      ...mapActions(["fetchSongs","fetchArtists","fetchPlayLists"]),
       
       searchForSongs(searchTerm){
         this.fetchSongs(searchTerm)
       },
       searchForArtists(searchTerm){
         this.fetchArtists(searchTerm)
+      },
+      searchForPlaylists(searchTerm){
+        this.fetchPlayLists(searchTerm)
       }
-    }      
-  };
+
+  },
+  }
 
 </script>
 
