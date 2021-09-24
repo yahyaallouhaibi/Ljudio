@@ -5,9 +5,6 @@
       rel="stylesheet"
     />
 
-    <div class="thumbnail">
-      <img id="imageThumbnail" src="../assets/headset.png" alt="thumbnail" />
-    </div>
     <div class="songDetails">
       <h2>
         <img src="../assets/musicalNote.png" alt="musical note" />
@@ -22,21 +19,24 @@
         {{ $store.state.chosenSong.album.name }}
       </h3>
     </div>
-    <div class="playerButtons">
-      <button @click="PreviusSong()" id="previousSong">
-        <i class="fas fa-step-backward"></i>
-      </button>
-      <button id="playSong" @click="PlaySong($store.state.chosenSong.videoId)">
-        <i class="fas fa-play"></i>
-      </button>
-      <!--change to pause when playing a song-->
-      <button id="nextSong" @click="NextSong()">
-        <i class="fas fa-step-forward"></i>
-      </button>
-    </div>
 
     <div class="progressBar">
       <input type="range" min="0" max="100" value="0" id="durationSlider" />
+    </div>
+
+    <div class="playerButtons">
+      <button @click="PreviousSong()" id="previousSong">
+        <i class="fas fa-step-backward"></i>
+      </button>
+      <button class="playSong" @click="PlaySong()">
+        <i class="fas fa-play"></i>
+      </button>
+      <button class="playSong" @click="pauseSong()">
+        <i class="fas fa-pause"></i>
+      </button>
+      <button id="nextSong" @click="NextSong()">
+        <i class="fas fa-step-forward"></i>
+      </button>
     </div>
   </div>
 </template>
@@ -44,10 +44,17 @@
 <script>
 export default {
   methods: {
-    PlaySong(id) {
-      console.log(id);
-      console.log(typeof id === "string");
+    PlaySong() {
       window.player.playVideo();
+    },
+    pauseSong() {
+      window.player.pauseVideo();
+    },
+    NextSong() {
+      window.player.nextVideo();
+    },
+    previousSong() {
+      window.player.previousVideo();
     },
   },
 };
@@ -56,16 +63,11 @@ export default {
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 .musicPlayer {
-  background: linear-gradient(to left, #393e46, #aaaaaa);
+  background: linear-gradient(to right, #393e46, #aaaaaa);
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-}
-
-.thumbnail {
-  margin: 5vh 2vw 2vh;
-  max-width: 60%;
-  max-height: 60%;
 }
 .songDetails {
   display: flex;
@@ -73,11 +75,15 @@ export default {
   align-items: center;
   color: whitesmoke;
   font-family: Raleway;
+  width: 20%;
 }
 .songDetails,
 h2,
 h3 {
   margin: 0.5vh;
+}
+.playerButtons {
+  width: 30%;
 }
 button {
   background-color: #aad8d3;
@@ -90,8 +96,9 @@ button {
   display: inline-block;
   font-size: 16px;
   margin: 1em 0.5em;
+  cursor: pointer;
 }
-#playSong {
+.playSong {
   font-size: 32px;
 }
 
@@ -111,6 +118,6 @@ button {
   border-radius: 50%;
 }
 .progressBar {
-  width: 60%;
+  width: 20%;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="pageBody">
     <HeaderComponent />
     <NavBar class="navBar" />
-    <router-view></router-view>
     <Player class="musicPlayerComponent" />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -30,21 +30,10 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.searchResults-musicPlayer {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.searchResults {
-  width: 70%;
-}
-.navBar {
-  width: 100%;
-  height: auto;
-}
+
 .musicPlayerComponent {
-  width: 30%;
-  height: 50%;
+  width: 100%;
+  height: 5%vh;
   margin-top: 1em;
 }
 </style>

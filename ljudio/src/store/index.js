@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex"
 import axios from 'axios'
 
 const store = createStore({
@@ -8,13 +8,15 @@ const store = createStore({
       searchedTerm:"",
       searchedSongs:[],
       searchedArtists:[],
-      searchedPlayLists:[],
+      searchedPlaylists:[],
       chosenSong:{
          videoId:'',
          name: "Song name",
          artist: {name:"Artist name"},
          album: {name:"Album name"},
-         }
+         },
+      chosenPlaylist:{},
+      chosenPlaylistBrowseId:""
       
    },
 
@@ -30,10 +32,16 @@ const store = createStore({
          state.searchedArtists = data
       },
       setSearchedPlaylists(state,data){
-         state.searchedPlayLists = data
+         state.searchedPlaylists = data
       },
       setChosenSong(state,data){
          state.chosenSong = data
+      },
+      setChosenPlaylist(state,data){
+         state.chosenPlaylist = data
+      },
+      setChosenPlaylistBrowseId(state,data){
+       state.chosenPlaylistBrowseId = data
       }
    },
 
@@ -47,9 +55,13 @@ const store = createStore({
          let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/artists/${searchTerm}`)
          context.commit("setSearchedArtists",data.data.content)
       },
-      async fetchPlayLists(context,searchTerm){
+      async fetchPlaylists(context,searchTerm){
          let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/playlists/${searchTerm}`)
-         context.commit("setSearchedArtists",data.data.content)
+         context.commit("setSearchedPlaylists",data.data.content)
+      },
+      async fetchChosenPlaylist(context,browseId){
+         let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/playlist/${browseId}`)
+         context.commit("setChosenPlaylist",data.data.content)
       }
    }
 })

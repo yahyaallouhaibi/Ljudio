@@ -5,34 +5,47 @@
       rel="stylesheet"
     />
     <div
-      @click="playPlaylist(searchedSong)"
-      class="PlayListsResults"
-      v-for="searchedSong in this.$store.state.searchedSongs"
-      :key="searchedSong.videoId"
+      @click="playPlaylist(searchedPlaylist.browseId)"
+      class="playlistResults"
+      v-for="searchedPlaylist in this.$store.state.searchedPlaylists"
+      :key="searchedPlaylist.browseId"
     >
       <div>
-        <img :src="searchedSong.thumbnails[0].url" alt="thumbnail" />
+        <img :src="searchedPlaylist.thumbnails[0].url" alt="thumbnail" />
       </div>
-      <div class="songDetails">
-        <h3>{{ searchedSong.name }}</h3>
-        <p>{{ searchedSong.artist.name }}</p>
-        <p>{{ searchedSong.album.name }}</p>
+      <div class="playlistDetails">
+        <h3>{{ searchedPlaylist.title }}</h3>
+        <p>{{ searchedPlaylist.author }}</p>
+        <p>{{ searchedPlaylist.trackCount }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      chosenSong: {},
+      chosenPlaylist: {},
     };
   },
   methods: {
-    playSong(chosenSong) {
-      this.$store.state.chosenSong = chosenSong;
-      window.player.loadVideoById(chosenSong.videoId);
+    ...mapActions(["fetchChosenPlaylist"]),
+
+    playPlaylist(browseId) {
+      this.fetchChosenPlaylist(browseId);
+      console.log(Object.assign({}, this.$store.state.chosenPlaylist));
+      window.player.loadPlaylist(
+        JSON.parse(JSON.stringify(this.$store.state.chosenPlaylist)).map(
+          (p) => p.videoId
+        )
+      );
+      //window.player.loadPlaylist(
+      //  Object.assign({}, this.$store.state.chosenPlaylist).map(
+      //   (p) => p.videoId
+      // )
+      //);
     },
   },
 };
@@ -41,7 +54,7 @@ export default {
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 
-.songResults {
+.playlistResults {
   display: flex;
   flex-direction: row;
   margin: 1em;
@@ -51,7 +64,7 @@ export default {
   align-items: center;
   cursor: pointer;
 }
-.songDetails {
+.playlistDetails {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,12 +72,15 @@ export default {
   color: whitesmoke;
   font-family: Raleway;
 }
-.songDetails p {
+.playlistDetails p {
   font-size: 20px;
   margin: 0.5vh;
 }
-.songDetails h3 {
+.playlistDetails h3 {
   font-size: 32px;
   margin: 0.5vh;
+}
+img {
+  max-width: 200px;
 }
 </style>
