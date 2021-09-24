@@ -15,7 +15,9 @@
         @click="searchForArtists(this.$store.state.searchedTerm)"
         >Artist</router-link
       >
-      <router-link to="/Playlists" @click="searchForPlaylists()"
+      <router-link
+        to="/Playlists"
+        @click="searchForPlaylists(this.$store.state.searchedTerm)"
         >Playlists</router-link
       >
       <SearchBar class="searchBar" />

@@ -11,8 +11,18 @@
       :key="searchedPlaylist.browseId"
     >
       <div>
-        <img :src="searchedPlaylist.thumbnails[0].url" alt="thumbnail" />
+        <img
+          v-if="searchedPlaylist.thumbnails.length"
+          :src="searchedPlaylist.thumbnails[0].url"
+          alt="thumbnail"
+        />
+        <img
+          v-else
+          :src="searchedPlaylist.thumbnails.url"
+          alt="../assets/album.png"
+        />
       </div>
+
       <div class="playlistDetails">
         <h3>{{ searchedPlaylist.title }}</h3>
         <p>{{ searchedPlaylist.author }}</p>
@@ -35,17 +45,11 @@ export default {
 
     playPlaylist(browseId) {
       this.fetchChosenPlaylist(browseId);
-      console.log(Object.assign({}, this.$store.state.chosenPlaylist));
       window.player.loadPlaylist(
         JSON.parse(JSON.stringify(this.$store.state.chosenPlaylist)).map(
           (p) => p.videoId
         )
       );
-      //window.player.loadPlaylist(
-      //  Object.assign({}, this.$store.state.chosenPlaylist).map(
-      //   (p) => p.videoId
-      // )
-      //);
     },
   },
 };
