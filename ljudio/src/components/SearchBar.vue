@@ -38,7 +38,7 @@ export default {
     searchForSongs(searchTerm) {
       this.$store.state.searchedTerm = searchTerm;
       this.fetchSongs(searchTerm);
-      router.push("/");
+      router.push("/Songs");
     },
   },
 };

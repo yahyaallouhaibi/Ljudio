@@ -5,21 +5,16 @@
       rel="stylesheet"
     />
     <div
-      @click="playSong(searchedSong)"
+      @click="playSongbyId($store.state.chosenSong.videoId)"
       class="songResults"
-      v-for="searchedSong in this.$store.state.searchedSongs"
-      :key="searchedSong.videoId"
     >
-      <router-link :to="'/Songs/' + searchedSong.videoId">{{
-        searchedSong.name
-      }}</router-link>
       <div>
-        <img :src="searchedSong.thumbnails[0].url" alt="thumbnail" />
+        <img :src="$store.state.chosenSong.thumbnails[0].url" alt="thumbnail" />
       </div>
       <div class="songDetails">
-        <h3>{{ searchedSong.name }}</h3>
-        <p>{{ searchedSong.artist.name }}</p>
-        <p>{{ searchedSong.album.name }}</p>
+        <h3>{{ $store.state.chosenSong.name }}</h3>
+        <p>{{ $store.state.chosenSong.artist.name }}</p>
+        <p>{{ $store.state.chosenSong.album.name }}</p>
       </div>
     </div>
   </div>
@@ -27,22 +22,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      chosenSong: {},
-    };
-  },
   methods: {
     async playSong(chosenSong) {
-      this.$store.state.chosenSong = chosenSong;
-      window.player.loadVideoById(chosenSong.videoId);
-
-      //try {
-      // await navigator.clipboard.writeText();
-      //alert("Copied");
-      //} //catch ($e) {
-      //alert("Cannot copy");
-      //}
+      window.player.loadVideoById(chosenSong);
     },
   },
 };

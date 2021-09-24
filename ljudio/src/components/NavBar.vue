@@ -6,7 +6,7 @@
     />
     <nav>
       <router-link
-        to="/"
+        to="/Songs"
         @click="searchForSongs(this.$store.state.searchedTerm)"
         >Songs</router-link
       >

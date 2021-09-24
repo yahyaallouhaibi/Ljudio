@@ -20,10 +20,6 @@
       </h3>
     </div>
 
-    <div class="progressBar">
-      <input type="range" min="0" max="100" value="0" id="durationSlider" />
-    </div>
-
     <div class="playerButtons">
       <button @click="PreviousSong()" id="previousSong">
         <i class="fas fa-step-backward"></i>
@@ -63,7 +59,7 @@ export default {
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 .musicPlayer {
-  background: linear-gradient(to right, #393e46, #aaaaaa);
+  background: #aad8d3;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -73,9 +69,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: whitesmoke;
+  color: #393e46;
   font-family: Raleway;
-  width: 20%;
+  width: 50%;
 }
 .songDetails,
 h2,
@@ -83,11 +79,11 @@ h3 {
   margin: 0.5vh;
 }
 .playerButtons {
-  width: 30%;
+  width: 50%;
 }
 button {
-  background-color: #aad8d3;
-  color: #00b4cc;
+  background-color: #00b4cc;
+  color: #aad8d3;
   border: none;
   border-radius: 50%;
   padding: 20px;
@@ -102,21 +98,6 @@ button {
   font-size: 32px;
 }
 
-#durationSlider {
-  -webkit-appearance: none;
-  width: 100%;
-  outline: none;
-  height: 2px;
-  margin: 2em 2em;
-}
-
-#durationSlider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  background: #00b4cc;
-  border-radius: 50%;
-}
 .progressBar {
   width: 20%;
 }

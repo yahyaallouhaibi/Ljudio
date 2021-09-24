@@ -11,7 +11,6 @@
 import HeaderComponent from "./components/HeaderComponent.vue";
 import NavBar from "./components/NavBar.vue";
 import Player from "./components/Player.vue";
-//import FooterComponent from "./components/FotterComponent.vue";
 
 export default {
   name: "App",
@@ -19,7 +18,6 @@ export default {
     HeaderComponent,
     NavBar,
     Player,
-    //FooterComponent,
   },
 };
 </script>
