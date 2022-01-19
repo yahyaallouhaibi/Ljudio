@@ -1,5 +1,5 @@
 <template>
-  <div class="Header">
+  <div class="header">
     <div class="logo">
       <link
         href="https://fonts.googleapis.com/css?family=Monoton:regular"
@@ -23,8 +23,6 @@ export default {};
 @import url(https://fonts.googleapis.com/css?family=Monoton:regular);
 
 .logo {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -33,7 +31,7 @@ export default {};
 }
 .logo h1 {
   margin: 0;
-  font-size: 5em;
+  font-size: 5rem;
   font-family: Monoton;
   color: #aad8d3;
 }

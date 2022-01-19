@@ -51,6 +51,11 @@ const store = createStore({
          let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/songs/${searchTerm}`)
          context.commit("setSearchedSongs",data.data.content)
       },
+      async fetchSongById(context,id){
+         let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/songs/${id}`)
+         context.commit("setChosenSong",data.data.content[0])
+         // console log
+      },
       async fetchArtists(context,searchTerm){
          let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/artists/${searchTerm}`)
          context.commit("setSearchedArtists",data.data.content)

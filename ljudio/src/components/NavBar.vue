@@ -5,6 +5,7 @@
       rel="stylesheet"
     />
     <nav>
+      <router-link to="/">Home</router-link>
       <router-link
         to="/Songs"
         @click="searchForSongs(this.$store.state.searchedTerm)"
@@ -63,11 +64,11 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .searchBar {
-  width: 30%;
+  width: 20%;
 }
 
 a {

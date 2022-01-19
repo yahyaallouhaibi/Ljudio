@@ -2,13 +2,13 @@ import { createWebHistory, createRouter } from "vue-router";
 import Songs from "../views/Songs.vue"
 import Artists from "../views/Artists.vue"
 import Playlists from "../views/Playlists.vue"
-import App from "../App.vue"
+import Home from "../views/Home.vue"
 
 const routes = [
     {
         path: "/",
         name:"Home",
-        component: App,
+        component: Home,
     },
     {
         path: "/Songs/:videoId?",
@@ -22,7 +22,7 @@ const routes = [
         component: Artists,
     },
     {
-        path:"/Playlists",
+        path:"/Playlists/",
         name:"Playlists",
         component: Playlists,
     }

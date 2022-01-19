@@ -10,9 +10,6 @@
       v-for="searchedSong in this.$store.state.searchedSongs"
       :key="searchedSong.videoId"
     >
-      <router-link :to="'/Songs/' + searchedSong.videoId">{{
-        searchedSong.name
-      }}</router-link>
       <div>
         <img :src="searchedSong.thumbnails[0].url" alt="thumbnail" />
       </div>
@@ -20,6 +17,12 @@
         <h3>{{ searchedSong.name }}</h3>
         <p>{{ searchedSong.artist.name }}</p>
         <p>{{ searchedSong.album.name }}</p>
+      </div>
+      <div class="shareBtn">
+        <button @click="shareSong">
+          share
+          <router-link :to="'/Songs/' + searchedSong.videoId"></router-link>
+        </button>
       </div>
     </div>
   </div>
@@ -32,17 +35,31 @@ export default {
       chosenSong: {},
     };
   },
+  created() {
+    this.loadSongOnCreate();
+  },
+
   methods: {
-    async playSong(chosenSong) {
+    playSong(chosenSong) {
       this.$store.state.chosenSong = chosenSong;
       window.player.loadVideoById(chosenSong.videoId);
-
-      //try {
-      // await navigator.clipboard.writeText();
-      //alert("Copied");
-      //} //catch ($e) {
-      //alert("Cannot copy");
-      //}
+      this.$router.push(`/songs/${chosenSong.videoId}`);
+    },
+    shareSong() {
+      try {
+        navigator.clipboard.writeText("localhost:8080" + this.$route.fullPath);
+        alert("Copied");
+      } catch ($e) {
+        alert("Cannot copy");
+      }
+    },
+    async loadSongOnCreate() {
+      if (
+        !this.$store.state.chosenSong.videoId &&
+        this.$route.params.videoId.length
+      ) {
+        await this.$store.dispatch("fetchSongById", this.$route.params.videoId);
+      }
     },
   },
 };
@@ -54,6 +71,8 @@ export default {
 .songResults {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  width: 100%;
   margin: 1em;
   border: solid 3px #aaaaaa;
   padding: 1em;
@@ -62,6 +81,7 @@ export default {
   cursor: pointer;
 }
 .songDetails {
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,5 +96,20 @@ export default {
 .songDetails h3 {
   font-size: 32px;
   margin: 0.5vh;
+}
+.shareBtn {
+  width: 20%;
+}
+.shareBtn button {
+  float: right;
+  width: 70%;
+  background-color: #393e46;
+  color: whitesmoke;
+  border: none;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 26px;
+  cursor: pointer;
 }
 </style>
