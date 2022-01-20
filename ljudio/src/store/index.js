@@ -8,6 +8,7 @@ const store = createStore({
       searchedTerm:"",
       searchedSongs:[],
       searchedArtists:[],
+      searchedArtist:{},
       searchedPlaylists:[],
       chosenSong:{
          videoId:'',
@@ -30,6 +31,9 @@ const store = createStore({
       },
       setSearchedArtists(state,data){
          state.searchedArtists = data
+      },
+      setSearchedArtist(state,data){
+         state.searchedArtist = data
       },
       setSearchedPlaylists(state,data){
          state.searchedPlaylists = data
@@ -59,6 +63,11 @@ const store = createStore({
       async fetchArtists(context,searchTerm){
          let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/artists/${searchTerm}`)
          context.commit("setSearchedArtists",data.data.content)
+      },
+      async fetchArtistById(context,id){
+         let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/artist/${id}`)
+         context.commit("setSearchedArtist",data.data)
+         console.log(data)
       },
       async fetchPlaylists(context,searchTerm){
          let data = await axios.get(`https://yt-music-api.herokuapp.com/api/yt/playlists/${searchTerm}`)
