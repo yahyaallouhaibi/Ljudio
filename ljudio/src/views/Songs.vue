@@ -19,10 +19,7 @@
         <p>{{ searchedSong.album.name }}</p>
       </div>
       <div class="shareBtn">
-        <button @click="shareSong">
-          share
-          <router-link :to="'/Songs/' + searchedSong.videoId"></router-link>
-        </button>
+        <button @click="shareSong(searchedSong.videoId)">share</button>
       </div>
     </div>
   </div>
@@ -45,9 +42,9 @@ export default {
       window.player.loadVideoById(chosenSong.videoId);
       this.$router.push(`/songs/${chosenSong.videoId}`);
     },
-    shareSong() {
+    shareSong(videoId) {
       try {
-        navigator.clipboard.writeText("localhost:8080" + this.$route.fullPath);
+        navigator.clipboard.writeText("localhost:8080/songs/" + videoId);
         alert("Copied");
       } catch ($e) {
         alert("Cannot copy");
