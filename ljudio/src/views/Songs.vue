@@ -37,8 +37,21 @@ export default {
   },
 
   methods: {
+    loadCurrentPlaylist() {
+      if (this.$store.state.searchedSongs.length) {
+        this.$store.state.currentPlaylist = this.$store.state.searchedSongs;
+      }
+    },
     playSong(chosenSong) {
+      if (this.$store.state.chosenPlaylist.length) {
+        this.$store.state.chosenPlaylist = [];
+      }
+      this.loadCurrentPlaylist();
       this.$store.state.chosenSong = chosenSong;
+      let songIndex = this.$store.state.currentPlaylist.findIndex(
+        (s) => s.videoId == chosenSong.videoId
+      );
+      this.$store.state.songIndex = songIndex;
       window.player.loadVideoById(chosenSong.videoId);
       this.$router.push(`/songs/${chosenSong.videoId}`);
     },

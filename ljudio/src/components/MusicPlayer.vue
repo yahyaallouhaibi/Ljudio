@@ -5,7 +5,17 @@
       rel="stylesheet"
     />
 
-    <div class="songDetails">
+    <div v-if="this.$store.state.chosenPlaylist.length" class="songDetails">
+      <h2>
+        <img src="../assets/musicalNote.png" alt="musical note" />
+        {{ $store.state.chosenSong.name }}
+      </h2>
+      <h3>
+        <img src="../assets/singer.png" alt="singer" />
+        {{ $store.state.chosenSong.author.name }}
+      </h3>
+    </div>
+    <div v-else class="songDetails">
       <h2>
         <img src="../assets/musicalNote.png" alt="musical note" />
         {{ $store.state.chosenSong.name }}
@@ -21,10 +31,10 @@
     </div>
 
     <div class="playerButtons">
-      <button @click="PreviousSong()" id="previousSong">
+      <button @click="previousSong()" id="previousSong">
         <i class="fas fa-step-backward"></i>
       </button>
-      <button class="playSong" @click="PlaySong()">
+      <button class="playSong" @click="playSong()">
         <i class="fas fa-play"></i>
       </button>
       <button class="playSong" @click="pauseSong()">
@@ -42,18 +52,37 @@ export default {
   name: "MusicPlayer",
 
   methods: {
-    PlaySong() {
+    playSong() {
       window.player.loadVideoById(this.$store.state.chosenSong.videoId); //route params
-      window.player.playVideo();
     },
     pauseSong() {
       window.player.pauseVideo();
     },
     NextSong() {
-      window.player.nextVideo();
+      if (this.$store.state.currentPlaylist.length) {
+        let songIndex = this.$store.state.songIndex;
+        window.player.loadVideoById(
+          this.$store.state.currentPlaylist[songIndex + 1].videoId
+        );
+        this.$store.state.chosenSong =
+          this.$store.state.currentPlaylist[songIndex + 1];
+        this.$store.state.songIndex++;
+      }
+
+      //window.player.nextVideo();
     },
     previousSong() {
-      window.player.previousVideo();
+      if (this.$store.state.currentPlaylist.length) {
+        let songIndex = this.$store.state.songIndex;
+        if (songIndex > 0) {
+          window.player.loadVideoById(
+            this.$store.state.currentPlaylist[songIndex - 1].videoId
+          );
+          this.$store.state.chosenSong =
+            this.$store.state.currentPlaylist[songIndex - 1];
+          this.$store.state.songIndex--;
+        }
+      }
     },
   },
 };

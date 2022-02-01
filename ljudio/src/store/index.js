@@ -16,8 +16,11 @@ const store = createStore({
          artist: {name:"Artist name"},
          album: {name:"Album name"},
          },
-      chosenPlaylist:{},
-      chosenPlaylistBrowseId:""
+      chosenPlaylist:[],
+      currentPlaylist: [],
+      currentSong: {},
+      chosenPlaylistBrowseId:"",
+      songIndex:0
       
    },
 

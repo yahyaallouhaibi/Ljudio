@@ -36,20 +36,24 @@
 import { mapActions } from "vuex";
 export default {
   data() {
-    return {
-      chosenPlaylist: {},
-    };
+    return {};
   },
   methods: {
     ...mapActions(["fetchChosenPlaylist"]),
 
-    playPlaylist(browseId) {
-      this.fetchChosenPlaylist(browseId);
-      window.player.loadPlaylist(
-        JSON.parse(JSON.stringify(this.$store.state.chosenPlaylist)).map(
-          (p) => p.videoId
-        )
-      );
+    async playPlaylist(browseId) {
+      await this.fetchChosenPlaylist(browseId);
+
+      if (this.$store.state.chosenPlaylist.length) {
+        this.$store.state.currentPlaylist = this.$store.state.chosenPlaylist;
+        this.$store.state.songIndex = 0;
+        window.player.loadPlaylist(
+          JSON.parse(JSON.stringify(this.$store.state.currentPlaylist)).map(
+            (p) => p.videoId
+          )
+        );
+        this.$store.state.chosenSong = this.$store.state.currentPlaylist[0];
+      }
     },
   },
 };
